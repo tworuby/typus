@@ -145,7 +145,12 @@ module Admin::FormHelper
       # It's a has_many relationship, so items that are already assigned to another
       # entry are assigned to that entry.
       #
-      items_to_relate = model_to_relate.find(:all, :conditions => ["#{foreign_key} is ?", nil])
+      items_to_relate=nil
+      if reflection.through_reflection
+        items_to_relate = model_to_relate.all #TODO replace to left outher join with ''thorught'' relation and condtion foreign_id is nil
+      else
+        items_to_relate = model_to_relate.find(:all, :conditions => ["#{foreign_key} is ?", nil])
+      end
       if condition && !items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
