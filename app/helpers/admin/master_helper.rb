@@ -100,5 +100,12 @@ module Admin::MasterHelper
     end
 
   end
+  
+  def typus_selector_value(attribute, item)
+    option = item.class.send(attribute).detect do |option|
+      option.kind_of?(Array) ? item.send(attribute).eql?(option.last) : item.send(attribute).eql?(option)
+    end
+    option.kind_of?(Array) ? option.first : option
+  end
 
 end

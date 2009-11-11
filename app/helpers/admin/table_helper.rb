@@ -19,6 +19,7 @@ module Admin::TableHelper
         fields.each do |key, value|
           case value
           when :boolean then           html << typus_table_boolean_field(key, item)
+          when :selector then          html << typus_table_selector_value(key, item)
           when :datetime then          html << typus_table_datetime_field(key, item, link_options)
           when :date then              html << typus_table_datetime_field(key, item, link_options)
           when :file then              html << typus_table_file_field(key, item, link_options)
@@ -237,6 +238,12 @@ module Admin::TableHelper
 <td align="center">#{content}</td>
     HTML
 
+  end
+  
+  def typus_table_selector_value(attribute, item)
+    <<-HTML
+<td align="center">#{typus_selector_value(attribute, item)}</td>
+    HTML
   end
 
 end

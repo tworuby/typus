@@ -12,7 +12,6 @@ module Admin::FormHelper
       html << '<ul>'
 
       fields.each do |key, value|
-
         if template = @resource[:class].typus_template(key)
           html << typus_template_field(key, template, options)
           next

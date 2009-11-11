@@ -24,6 +24,9 @@
              raw_data.typus_name if !raw_data.nil?
            when :file
              @item.typus_preview(field.first)
+           when :selector
+             text = h(typus_selector_value(field.first, @item))
+             
            when :text
              text = h(raw_data)
              defined?(RDiscount) ? markdown(text) : text
